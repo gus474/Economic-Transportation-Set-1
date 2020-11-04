@@ -1,0 +1,77 @@
+import pandas as pd
+from numpy import*
+import matplotlib.pyplot as plt
+from pandas import DataFrame, read_csv
+from scipy.interpolate import*
+from mlxtend.plotting import plot_linear_regression
+import seaborn as sns
+from sklearn.linear_model import LinearRegression
+
+
+file = r'C://Users//19085//Downloads//ps1_data.csv'
+
+df = pd.read_csv(file)
+print(df['Zcta5'].count)
+df = df.dropna()
+
+print(df.describe())
+
+from statsmodels.formula.api import ols
+#from statsmodels.stats.anova import anova_lm
+#x = df['DrivingTime']
+#y = df['MedianPrice']
+#print(x)
+#print(y)
+#df = df.dropna()
+#data = pd.DataFrame({'DrivingTime': x, 'MedianPrice': y})
+
+#data = data.dropna().reset_index(drop=True) 
+#print(data)
+plt.scatter(df['DrivingTime'], df['MedianPrice'])
+plt.xlabel('Driving Time')
+plt.ylabel('Median Price')
+plt.title('Driving Time vs Median Home Price Scatterplot')
+
+# Fit the model
+model = ols('MedianPrice ~ DrivingTime', df).fit()
+print(df['DrivingTime'])
+
+
+# Print the summary
+print(model.summary())
+
+# Peform analysis of variance on fitted linear model
+#anova_results = anova_lm(model)
+
+#print('\nANOVA results')
+#print(anova_results)
+
+#x = np.array(df['DrivingTime']).reshape((-1,1))
+#y = np.array(df['MedianPrice'])
+#model = LinearRegression()
+#model.fit(x,y)
+model = ols('MedianPrice ~ DrivingTime + C(Bedroom)', df).fit()
+print(model.summary())
+plt.scatter(df['DrivingDistance'], df['MathScore'])
+plt.xlabel('Driving Distance')
+plt.ylabel('Math Scores')
+plt.title('Driving Distance vs Math Scores Scatterplot')
+model = ols('MathScore ~ DrivingDistance', df).fit
+
+sns.regplot(x=df['DrivingDistance'], y=df['MathScore'], data = df)
+
+
+
+model = ols('MedianPrice ~ MathScore + DrivingTime + Bedroom', df).fit()
+print(model.summary())
+
+
+
+from sklearn.preprocessing import PolynomialFeatures
+
+
+
+interaction = PolynomialFeatures(degree=3, include_bias=False, interaction_only=True)
+x =df['MathScore + Bedroom']
+y = df['MedianPrice']
+poly = polyfit.(y,x)
