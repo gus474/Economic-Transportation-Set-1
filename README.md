@@ -1,0 +1,2 @@
+# Economic-Transportation-Set-1
+Report for my first Automobile dataset, using Python. Here I analyzed dataset observations and kept those that were deemed fit for the analysis. I then graphed and regressed to predict variable outcomes using a variety of packages including Numpy, Pandas, Scipy, Sklearning, and Seaborn. I then discussed the theory and possible explanations for the empirical results.
